@@ -44,9 +44,54 @@ public class BlackJack {
 		 
 		 System.out.println("Welcome to the Blackjack table!\n");
 		 System.out.println("The cards have been dealt. Your cards are " + userCard1 + " and " + userCard2 + ", so your total is " + (userCard1+userCard2));
-		 System.out.println("\nThe dealer's flipped card is " + dealerCard1 + "\n");
+		 System.out.println("\nThe dealer's flipped card is " + dealerCard1);
+		 
+		 String userMove = "foobar";
 		 
 		 
+		 while (userTotal <= 21){
+			 System.out.println("\nWould you like to hit or pass? ");
+			 userMove = keyboard.next();
+			 if (userMove.equals("pass")){
+				 break;
+			 }
+			 else if (userMove.equals("hit")){
+				int tempHit = cardPicker();
+				userTotal += tempHit;
+				System.out.println("You have been dealt a " + tempHit + ". Your total is now " + userTotal);
+			 }
+			 else{
+				 System.out.println("Sorry, I did not understand what you said.");
+				 System.out.println(userMove);
+			 }
+		 }
+		 if (userTotal > 21){
+			 System.out.println("\nYou have exceed 21, so you lose by default.");
+			 return;
+		 }
+		 System.out.println("You have completed your round.\n");
+		 System.out.println("The dealer reveals that his second card is a " + dealerCard2 + ", which makes their total " + dealerTotal + "\n");
+		 while (dealerTotal < 17){
+			 int dealerHit = cardPicker();
+			 dealerTotal = dealerTotal + dealerHit;
+			 System.out.println("The dealer hits theirself and gets a " + dealerHit + ", giving them a total of " + dealerTotal);
+		 }
+		 if (dealerTotal > 21){
+			 System.out.println("\nThe dealer has exceed 21, so you win by default.");
+			 return;
+		 }
+		 System.out.println("Your total is " + userTotal + ", and the dealer's total is " + dealerTotal + "\n");
+		 
+		 if (userTotal > dealerTotal){
+			 System.out.println(userTotal + " is greater than " + dealerTotal + ", so you win.");
+		 }
+		 else if (userTotal < dealerTotal){
+			 System.out.println(dealerTotal + " is greater than " + userTotal + ", so you lose.");
+		 }
+		 else{
+			 System.out.println("You and the dealer have tied.");
+		 }
 
+		 
 	}
 }
