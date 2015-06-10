@@ -1,0 +1,97 @@
+import java.util.Scanner;
+import java.util.Random;
+public class BlackJack {
+	
+
+	
+	public static void main(String[] args){
+		
+		 Scanner keyboard = new Scanner(System.in);
+		 
+		 Random rand = new Random();
+		
+		 int heartCards[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
+		 int diamondCards[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
+		 int clubCards[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
+		 int spadeCards[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
+		 
+		 int[][] Cards = {heartCards, diamondCards, clubCards, spadeCards};
+		 
+		 // INITIAL DEAL
+		 
+		 int userCard1 = 0;
+		 int userCard2 = 0;
+		 int dealerCard1 = 0;
+		 int dealerCard2 = 0;
+		 
+		 int userTotal;
+		 int dealerTotal;
+		 
+		 
+		 while (userCard1 == 0){
+			 int tempValue1 = rand.nextInt(13);
+			 int tempValue2 = rand.nextInt(4);
+			 if (Cards[tempValue2][tempValue1] != 0){
+				 userCard1 = Cards[tempValue2][tempValue1];
+				 Cards[tempValue2][tempValue1] = 0;
+			 }
+		 }
+		 
+		 while (dealerCard1 == 0){
+			 int tempValue1 = rand.nextInt(13);
+			 int tempValue2 = rand.nextInt(4);
+			 if (Cards[tempValue2][tempValue1] != 0){
+				 dealerCard1 = Cards[tempValue2][tempValue1];
+				 Cards[tempValue2][tempValue1] = 0;
+			 }
+			 
+		 }
+		 
+		 while (userCard2 == 0){
+			 int tempValue1 = rand.nextInt(13);
+			 int tempValue2 = rand.nextInt(4);
+			 if (Cards[tempValue2][tempValue1] != 0){
+				 userCard2 = Cards[tempValue2][tempValue1];
+				 Cards[tempValue2][tempValue1] = 0;
+			 }
+		 }
+		 
+		 while (dealerCard2 == 0){
+			 int tempValue1 = rand.nextInt(13);
+			 int tempValue2 = rand.nextInt(4);
+			 if (Cards[tempValue2][tempValue1] != 0){
+				 dealerCard2 = Cards[tempValue2][tempValue1];
+				 Cards[tempValue2][tempValue1] = 0;
+			 }
+		 }
+		 
+		 String userMove;
+		 
+		 System.out.println("Welcome to the Blackjack table!\n");
+		 System.out.println("The cards have been dealt. Your cards are " + userCard1 + " and " + userCard2 + ", so your total is " + (userCard1+userCard2));
+		 System.out.println("\nThe dealer's flipped card is " + dealerCard1 + "\n");
+		 
+		 userTotal = userCard1 + userCard2;
+		 
+		 while (userTotal <= 21){
+			 System.out.println("Do you want to hit or pass? (hit/pass): ");
+			 userMove = keyboard.next();
+			 if (userMove == "pass"){
+				 break;
+			 }
+			 else if (userMove == "hit"){
+				 int tempHit = 0;
+				 while (tempHit == 0){
+					 int tempValue1 = rand.nextInt(13);
+					 int tempValue2 = rand.nextInt(4);
+					 if (Cards[tempValue2][tempValue1] != 0){
+						 tempHit = Cards[tempValue2][tempValue1];
+						 Cards[tempValue2][tempValue1] = 0;
+				 }
+				userTotal += tempHit;
+				System.out.println("You have been dealt a " + tempHit + ", giving you a total of " + userTotal);
+			 }
+		 }
+	}
+	}
+}
